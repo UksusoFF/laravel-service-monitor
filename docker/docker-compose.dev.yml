@@ -1,0 +1,59 @@
+version: "3.7"
+
+services:
+    node:
+        container_name: ${APP_NAME}-node
+        build:
+            context: ..
+            dockerfile: docker/dev/node/Dockerfile
+        volumes:
+            - ./../ui:/var/www/ui
+        tty: true
+
+    php:
+        container_name: ${APP_NAME}-php
+        build:
+            context: ..
+            dockerfile: docker/dev/php/Dockerfile
+        volumes:
+            - ./../api:/var/www/api
+            - ./../ui:/var/www/ui
+            - ./.env:/var/www/api/.env
+            - ./dev/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        depends_on:
+            - database
+
+    database:
+        container_name: ${APP_NAME}-db
+        image: postgres:15
+        environment:
+            POSTGRES_DB: ${APP_NAME}
+            POSTGRES_USER: ${APP_NAME}
+            POSTGRES_PASSWORD: ${APP_NAME}
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+
+    adminer:
+        container_name: ${APP_NAME}-adminer
+        image: adminer
+        environment:
+            - ADMINER_DESIGN=nette
+        ports:
+            - 9990:8080
+
+    nginx:
+        container_name: ${APP_NAME}-nginx
+        build:
+            context: ..
+            dockerfile: docker/dev/nginx/Dockerfile
+        restart: unless-stopped
+        depends_on:
+            - php
+        volumes:
+            - ./../api:/var/www/api
+            - ./../ui:/var/www/ui
+            - ./data/logs/nginx:/var/log/nginx
+        ports:
+            - ${APP_PORT}:80
