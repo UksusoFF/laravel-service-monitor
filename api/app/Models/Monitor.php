@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\Traits\SupportsCertificateCheck;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Orchid\Screen\AsSource;
 
 /**
  * App\Models\Monitor
@@ -63,6 +64,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Monitor extends \Spatie\UptimeMonitor\Models\Monitor
 {
+    use AsSource;
     use SupportsCertificateCheck;
 
     public function certificateStatuses(): HasMany

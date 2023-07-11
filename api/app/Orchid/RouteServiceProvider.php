@@ -11,6 +11,8 @@ use App\Orchid\Models\Examples\ExampleFieldsScreen;
 use App\Orchid\Models\Examples\ExampleLayoutsScreen;
 use App\Orchid\Models\Examples\ExampleScreen;
 use App\Orchid\Models\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Models\Facility\FacilityListScreen;
+use App\Orchid\Models\Monitor\MonitorListScreen;
 use App\Orchid\Models\PlatformScreen;
 use App\Orchid\Models\Role\RoleEditScreen;
 use App\Orchid\Models\Role\RoleListScreen;
@@ -98,21 +100,7 @@ class RouteServiceProvider extends ServiceProvider
                         ->parent('platform.index')
                         ->push(__('Roles'), route('platform.systems.roles')));
 
-                // Example...
-                Route::screen('example', ExampleScreen::class)
-                    ->name('platform.example')
-                    ->breadcrumbs(fn(Trail $trail) => $trail
-                        ->parent('platform.index')
-                        ->push('Example screen'));
-
-                Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
-                Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
-                Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
-                Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
-                Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
-                Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-
-                // Route::screen('idea', Idea::class, 'platform.screens.idea');
+                Route::screen('monitors', MonitorListScreen::class)->name('admin.monitors');
             });
     }
 }
