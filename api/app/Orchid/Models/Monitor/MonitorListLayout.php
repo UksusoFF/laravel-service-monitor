@@ -18,8 +18,14 @@ class MonitorListLayout extends Table
     public function columns(): array
     {
         return [
-            TD::make('id', __('ID')),
             TD::make('url', __('URL')),
+            TD::make('status', __('Status'))
+                ->render(function (Monitor $monitor) {
+                    return view('admin.td.status', [
+                        'status' => $monitor->uptime_status,
+                    ]);
+                }),
+            TD::make('status_date', __('Last check'))->render(fn(Monitor $monitor) => $monitor->uptime_last_check_date),
             TD::make('cert', __('Certificate'))
                 ->render(function (Monitor $monitor) {
                     return view('admin.td.status', [

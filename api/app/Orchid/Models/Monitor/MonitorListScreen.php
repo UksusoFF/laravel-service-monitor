@@ -25,6 +25,6 @@ class MonitorListScreen extends Screen
 
     public function name(): ?string
     {
-        return __('Monitors');
+        return __('Servers');
     }
 }

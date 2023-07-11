@@ -28,6 +28,6 @@ done
 #php artisan import:prop-facilities
 #php artisan data:generate
 
-nohup php artisan schedule:run &
+nohup php artisan schedule:work &>> /var/www/api/storage/logs/artisan.log &
 
 php-fpm

@@ -1,1 +1,1 @@
-<h3><span class="badge {{ $status === 'valid' ? 'bg-success' : 'bg-danger' }}">{{ $status }}</span></h3>
+<h3><span class="badge {{ ($status === 'valid' || $status === 'up') ? 'bg-success' : 'bg-danger' }}">{{ $status }}</span></h3>
