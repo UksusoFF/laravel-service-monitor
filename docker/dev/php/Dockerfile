@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     zip unzip \
     jpegoptim optipng pngquant gifsicle libwebp-dev \
     libpq-dev \
+    libicu-dev \
     git
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -23,6 +24,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg  --with-webp
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install exif
 RUN docker-php-ext-install pdo pdo_pgsql pgsql
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install intl
 
 RUN pecl install xdebug-3.2.1 \
     && docker-php-ext-enable xdebug

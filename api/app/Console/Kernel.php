@@ -7,6 +7,8 @@ namespace App\Console;
 use App\Console\Commands\VersionIncrementCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Spatie\UptimeMonitor\Commands\CheckCertificates;
+use Spatie\UptimeMonitor\Commands\CheckUptime;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,7 +18,8 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        //
+        $schedule->command(CheckUptime::class)->everyMinute();
+        $schedule->command(CheckCertificates::class)->daily();
     }
 
     protected function bootstrappers(): array

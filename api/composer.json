@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "orchid/platform": "^13.9",
+        "spatie/laravel-uptime-monitor": "^4.2",
         "symfony/dom-crawler": "^6.2"
     },
     "require-dev": {
@@ -42,12 +43,12 @@
         ],
         "fresh": [
             "@php artisan migrate:fresh",
+            "@php artisan monitor:create https://tt-test.nk-soft.com",
             "@php artisan orchid:admin admin admin@admin.com password"
         ],
         "cs-fix": [
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models --write --reset",
-            "@php artisan model:typer",
             "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php"
         ],
         "ca-run": [
