@@ -12,6 +12,7 @@ use Orchid\Screen\AsSource;
  *
  * @property int $id
  * @property \Spatie\Url\Url|null $url
+ * @property string|null $group
  * @property bool $uptime_check_enabled
  * @property string $look_for_string
  * @property string $uptime_check_interval_in_minutes
@@ -29,6 +30,7 @@ use Orchid\Screen\AsSource;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\MonitorCertificateStatus|null $certificate
+ * @property-read \App\Models\MonitorCertificateStatus|null $certificatePrevious
  * @property-read string $certificate_status_as_emoji
  * @property-read string $certificate_status
  * @property-read string $chunked_last_certificate_check_failure_reason
@@ -42,6 +44,7 @@ use Orchid\Screen\AsSource;
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor query()
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor whereCertificateCheckEnabled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Monitor whereGroup($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor whereLookForString($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor whereUpdatedAt($value)
@@ -64,4 +67,9 @@ class Monitor extends \Spatie\UptimeMonitor\Models\Monitor
 {
     use AsSource;
     use SupportsCertificateCheck;
+
+    protected $fillable = [
+        'url',
+        'group',
+    ];
 }

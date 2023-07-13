@@ -44,8 +44,7 @@
         ],
         "fresh": [
             "@php artisan migrate:fresh",
-            "@php artisan monitor:create https://tt.nk-soft.com",
-            "@php artisan monitor:create https://tt-test.nk-soft.com",
+            "@php artisan monitor:import",
             "@php artisan orchid:admin admin admin@admin.com password"
         ],
         "cs-fix": [

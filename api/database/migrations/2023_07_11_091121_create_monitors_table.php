@@ -12,6 +12,7 @@ return new class() extends Migration {
         Schema::create('monitors', function(Blueprint $table) {
             $table->increments('id');
             $table->string('url')->unique();
+            $table->string('group')->nullable();
 
             $table->boolean('uptime_check_enabled')->default(true);
             $table->string('look_for_string')->default('');
