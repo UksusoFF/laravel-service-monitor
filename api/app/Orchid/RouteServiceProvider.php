@@ -4,14 +4,6 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
-use App\Orchid\Models\Examples\ExampleCardsScreen;
-use App\Orchid\Models\Examples\ExampleChartsScreen;
-use App\Orchid\Models\Examples\ExampleFieldsAdvancedScreen;
-use App\Orchid\Models\Examples\ExampleFieldsScreen;
-use App\Orchid\Models\Examples\ExampleLayoutsScreen;
-use App\Orchid\Models\Examples\ExampleScreen;
-use App\Orchid\Models\Examples\ExampleTextEditorsScreen;
-use App\Orchid\Models\Facility\FacilityListScreen;
 use App\Orchid\Models\Monitor\MonitorListScreen;
 use App\Orchid\Models\PlatformScreen;
 use App\Orchid\Models\Role\RoleEditScreen;

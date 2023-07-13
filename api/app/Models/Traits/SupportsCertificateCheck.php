@@ -6,20 +6,27 @@ namespace App\Models\Traits;
 
 use App\Models\MonitorCertificateStatus;
 use Exception;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\SslCertificate\SslCertificate;
 use Spatie\UptimeMonitor\Events\CertificateCheckFailed;
 use Spatie\UptimeMonitor\Models\Enums\CertificateStatus;
 
 trait SupportsCertificateCheck
 {
+    public function certificate(): HasOne
+    {
+        return $this->hasOne(MonitorCertificateStatus::class)->latest();
+    }
+
     public function getCertificateStatusAttribute(): string
     {
-        return $this->certificateStatuses->first()?->certificate_status ?? CertificateStatus::INVALID;
+        return $this->certificate?->certificate_status ?? CertificateStatus::INVALID;
     }
 
     public function setCertificateCheckFailureReasonAttribute(string $reason): void
     {
-        $status = $this->certificateStatuses->first();
+        /** @var \App\Models\MonitorCertificateStatus $status */
+        $status = $this->certificate()->get();
 
         $status->certificate_status = $reason;
 

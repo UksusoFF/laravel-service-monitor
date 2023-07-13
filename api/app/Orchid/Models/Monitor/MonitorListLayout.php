@@ -20,19 +20,19 @@ class MonitorListLayout extends Table
         return [
             TD::make('url', __('URL')),
             TD::make('status', __('Status'))
-                ->render(function (Monitor $monitor) {
+                ->render(function(Monitor $monitor) {
                     return view('admin.td.status', [
                         'status' => $monitor->uptime_status,
                     ]);
                 }),
-            TD::make('status_date', __('Last check'))->render(fn(Monitor $monitor) => $monitor->uptime_last_check_date),
+            TD::make('status_date', __('Last check'))->render(fn(Monitor $monitor) => $monitor->uptime_last_check_date->diffForHumans()),
             TD::make('cert', __('Certificate'))
-                ->render(function (Monitor $monitor) {
+                ->render(function(Monitor $monitor) {
                     return view('admin.td.status', [
                         'status' => $monitor->certificate_status,
                     ]);
                 }),
-            TD::make('cert_date', __('Last check'))->render(fn(Monitor $monitor) => $monitor->certificateStatuses->first()?->created_at),
+            TD::make('cert_date', __('Last check'))->render(fn(Monitor $monitor) => $monitor->certificate?->created_at->diffForHumans()),
         ];
     }
 }

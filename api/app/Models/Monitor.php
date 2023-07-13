@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Traits\SupportsCertificateCheck;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Screen\AsSource;
 
 /**
@@ -29,8 +28,7 @@ use Orchid\Screen\AsSource;
  * @property bool $certificate_check_enabled
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MonitorCertificateStatus> $certificateStatuses
- * @property-read int|null $certificate_statuses_count
+ * @property-read \App\Models\MonitorCertificateStatus|null $certificate
  * @property-read string $certificate_status_as_emoji
  * @property-read string $certificate_status
  * @property-read string $chunked_last_certificate_check_failure_reason
@@ -66,9 +64,4 @@ class Monitor extends \Spatie\UptimeMonitor\Models\Monitor
 {
     use AsSource;
     use SupportsCertificateCheck;
-
-    public function certificateStatuses(): HasMany
-    {
-        return $this->hasMany(MonitorCertificateStatus::class);
-    }
 }
