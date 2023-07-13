@@ -28,7 +28,7 @@ return new class() extends Migration {
             $table->text('uptime_check_additional_headers')->nullable();
             $table->string('uptime_check_response_checker')->nullable();
 
-            $table->boolean('certificate_check_enabled')->default(false);
+            $table->boolean('certificate_check_enabled')->default(true);
 
             $table->timestamps();
         });

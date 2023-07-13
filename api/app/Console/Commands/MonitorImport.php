@@ -20,7 +20,7 @@ class MonitorImport extends Command
         while(!feof($file)) {
             $line = fgets($file);
 
-            if (empty(trim($line))) {
+            if (empty(trim((string)$line))) {
                 continue;
             }
 
