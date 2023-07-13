@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(CheckUptime::class)->everyMinute();
         $schedule->command(CheckCertificates::class)->daily();
+        $schedule->command(MonitorDailyNotify::class)->dailyAt('9:00');
     }
 
     protected function bootstrappers(): array

@@ -6,7 +6,6 @@ namespace App\Orchid\Models\Monitor;
 
 use App\Models\Monitor;
 use App\Orchid\Models\ModelListActions;
-use App\Services\MegafonService;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -19,8 +18,6 @@ class MonitorListLayout extends Table
      */
     public function columns(): array
     {
-        $test = app(MegafonService::class)->balance();
-
         return [
             TD::make('group')->sort(),
             TD::make('url', __('URL')),

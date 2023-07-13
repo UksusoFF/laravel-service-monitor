@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Checks\CheckStatus;
+use App\Checks\MegafonCheck;
 use App\Console\Commands\Traits\ErrorReportable;
 use App\Models\Monitor;
 use Illuminate\Console\Command;
@@ -21,6 +23,8 @@ class MonitorDailyNotify extends Command
 
     public function handle(): int
     {
+        $this->checkChecks();
+
         $this->checkCertificates();
 
         $this->checkUptime();
@@ -28,6 +32,15 @@ class MonitorDailyNotify extends Command
         $this->errorReport();
 
         return Command::SUCCESS;
+    }
+
+    protected function checkChecks(): void
+    {
+        $check = app(MegafonCheck::class);
+        $check->check();
+        if ($check->status !== CheckStatus::SUCCESS) {
+            $this->errors[] = $check->getMessageText();
+        }
     }
 
     protected function checkCertificates(): void
