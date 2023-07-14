@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Models\Enums\CertificateStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Spatie\UptimeMonitor\Models\Enums\CertificateStatus;
 
 return new class() extends Migration {
     public function up(): void
