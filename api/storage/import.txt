@@ -1,8 +1,10 @@
 https://tt.nk-soft.com|tt-prod
-https://widget-online-record.nk-soft.com/parlour|tt-prod
+https://widget-online-record.nk-soft.com/|tt-prod
+https://pay-doc-widget.nk-soft.com/|tt-prod
 
 https://tt-test.nk-soft.com|tt-test
-https://test-widget-online-record.nk-soft.com/parlour|tt-test
+https://test-widget-online-record.nk-soft.com/|tt-test
+https://test-pay-doc-widget.nk-soft.com/|tt-test
 
 https://rock63.ru|rock63
 https://wiki.rock63.ru|rock63
