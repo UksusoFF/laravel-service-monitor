@@ -76,7 +76,7 @@ trait SupportsUptimeCheck
         $status->uptime_status = UptimeStatus::DOWN;
         $status->uptime_check_failure_reason = $exception->getMessage();
 
-        $this->save();
+        $status->save();
 
         if ($isStatusChanged) {
             event(new UptimeStatusFailed($this, $status));

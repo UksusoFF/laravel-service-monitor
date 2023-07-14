@@ -84,7 +84,7 @@ trait SupportsCertificateCheck
         $status->certificate_issuer = '';
         $status->certificate_check_failure_reason = $exception->getMessage();
 
-        $this->save();
+        $status->save();
 
         if ($isStatusChanged) {
             event(new CertificateStatusFailed($this, $status));
