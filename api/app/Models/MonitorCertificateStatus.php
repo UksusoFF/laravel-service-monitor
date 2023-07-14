@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $monitor_id
  * @property string $certificate_status
- * @property string|null $certificate_expiration_date
+ * @property \Illuminate\Support\Carbon|null $certificate_expiration_date
  * @property string|null $certificate_issuer
  * @property string $certificate_check_failure_reason
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -32,4 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MonitorCertificateStatus extends Model
 {
+    protected $casts = [
+        'certificate_expiration_date' => 'datetime',
+    ];
 }

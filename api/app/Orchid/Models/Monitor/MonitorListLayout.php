@@ -27,7 +27,7 @@ class MonitorListLayout extends Table
                         'status' => $monitor->uptime_status,
                     ]);
                 }),
-            TD::make('status_date', __('Last check'))->render(fn(Monitor $monitor) => $monitor->uptime_last_check_date?->diffForHumans()),
+            TD::make('status_date', __('Last check'))->render(fn(Monitor $monitor) => $monitor->uptime?->created_at?->diffForHumans()),
             TD::make('cert', __('Certificate'))
                 ->render(function(Monitor $monitor) {
                     return view('admin.td.status', [

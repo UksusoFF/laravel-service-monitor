@@ -18,6 +18,6 @@ class UptimeStatusFailed extends AbstractEvent implements HasMessage
 
     public function getMessageText(): string
     {
-        return "⚠️ Статус сайта изменился на {$this->status->uptime_status}".PHP_EOL."{$this->monitor->url}";
+        return "⚠️ Статус сайта изменился на {$this->monitor->uptime_status}".PHP_EOL."{$this->monitor->url}";
     }
 }

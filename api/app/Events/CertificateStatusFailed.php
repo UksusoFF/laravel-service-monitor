@@ -18,6 +18,6 @@ class CertificateStatusFailed extends AbstractEvent implements HasMessage
 
     public function getMessageText(): string
     {
-        return "⚠️ Статус SSL изменился на {$this->status->certificate_status}".PHP_EOL."{$this->monitor->url}";
+        return "⚠️ Статус SSL изменился на {$this->monitor->certificate_status}".PHP_EOL."{$this->monitor->url}";
     }
 }

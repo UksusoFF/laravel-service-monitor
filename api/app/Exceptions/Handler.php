@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -44,16 +43,5 @@ class Handler extends ExceptionHandler
         $this->reportable(function(Throwable $e) {
             //
         });
-    }
-
-    public function render($request, Throwable $e): Response
-    {
-        if ($e instanceof ERPException && $request->wantsJson()) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 422);
-        } {
-            return parent::render($request, $e);
-        }
     }
 }

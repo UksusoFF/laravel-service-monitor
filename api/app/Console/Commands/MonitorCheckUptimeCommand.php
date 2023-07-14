@@ -32,7 +32,7 @@ class MonitorCheckUptimeCommand extends AbstractMonitorCommand
             })
             ->get()
             ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url->getHost()}: {$monitor->uptime_status}";
+                $this->errors[] = "{$monitor->url}: {$monitor->uptime_status}";
             });
     }
 }

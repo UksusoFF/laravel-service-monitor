@@ -32,7 +32,7 @@ class MonitorCheckCertificateCommand extends AbstractMonitorCommand
             })
             ->get()
             ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url->getHost()}: {$monitor->certificate_status}";
+                $this->errors[] = "{$monitor->url}: {$monitor->certificate_status}";
             });
     }
 }
