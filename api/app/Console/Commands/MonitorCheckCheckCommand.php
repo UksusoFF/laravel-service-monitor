@@ -21,9 +21,4 @@ class MonitorCheckCheckCommand extends AbstractMonitorCommand
             $this->errors[] = $check->getMessageText();
         }
     }
-
-    protected function process(): void
-    {
-        return;
-    }
 }

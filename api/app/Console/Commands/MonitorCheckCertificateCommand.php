@@ -20,13 +20,4 @@ class MonitorCheckCertificateCommand extends AbstractMonitorCommand
                 $monitor->checkCertificate();
             });
     }
-
-    protected function process(): void
-    {
-        Monitor::failedCertificateCheck()
-            ->get()
-            ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url}: {$monitor->certificate_status}";
-            });
-    }
 }

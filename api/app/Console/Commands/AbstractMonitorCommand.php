@@ -22,7 +22,13 @@ abstract class AbstractMonitorCommand extends Command
         return Command::SUCCESS;
     }
 
-    abstract protected function check(): void;
+    protected function check(): void
+    {
+        //
+    }
 
-    abstract protected function process(): void;
+    protected function process(): void
+    {
+        //
+    }
 }

@@ -20,13 +20,4 @@ class MonitorCheckUptimeCommand extends AbstractMonitorCommand
                 $monitor->checkUptime();
             });
     }
-
-    protected function process(): void
-    {
-        Monitor::failedUptimeCheck()
-            ->get()
-            ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url}: {$monitor->uptime_status}";
-            });
-    }
 }
