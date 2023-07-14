@@ -6,14 +6,25 @@ namespace App\Models\Traits;
 
 use App\Events\CertificateStatusFailed;
 use App\Events\CertificateStatusSucceeded;
+use App\Models\Enums\CertificateStatus;
 use App\Models\MonitorCertificateStatus;
 use Exception;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\SslCertificate\SslCertificate;
-use Spatie\UptimeMonitor\Models\Enums\CertificateStatus;
 
 trait SupportsCertificateCheck
 {
+    public function checkCertificate(): void
+    {
+        try {
+            $certificate = SslCertificate::createForHostName($this->url);
+
+            $this->setCertificate($certificate);
+        } catch (Exception $exception) {
+            $this->setCertificateException($exception);
+        }
+    }
+
     public function certificate(): HasOne
     {
         return $this->hasOne(MonitorCertificateStatus::class)->latest();
@@ -43,7 +54,7 @@ trait SupportsCertificateCheck
     {
         $isStatusChanged = ($this->certificate?->certificate_status ?? null) !== CertificateStatus::VALID;
 
-        $newStatus = $certificate->isValid($this->raw_url)
+        $newStatus = $certificate->isValid($this->url)
             ? CertificateStatus::VALID
             : CertificateStatus::INVALID;
 

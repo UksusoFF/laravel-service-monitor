@@ -22,8 +22,6 @@ trait ErrorReportable
         }
 
         $lines = array_merge([
-            "⚠️ Во время выполнения команды `{$this->signature}` произошли ошибки!",
-            PHP_EOL,
             'Сервер: ' . config('app.url'),
             'Сообщения:',
         ], $this->errors);

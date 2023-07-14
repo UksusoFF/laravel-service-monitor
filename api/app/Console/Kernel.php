@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace App\Console;
 
-use App\Console\Commands\MonitorDailyNotify;
+use App\Console\Commands\MonitorCheckCertificateCommand;
+use App\Console\Commands\MonitorCheckCheckCommand;
+use App\Console\Commands\MonitorCheckUptimeCommand;
 use App\Console\Commands\MonitorImport;
-use App\Console\Commands\VersionIncrementCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Spatie\UptimeMonitor\Commands\CheckCertificates;
-use Spatie\UptimeMonitor\Commands\CheckUptime;
 
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        VersionIncrementCommand::class,
-        MonitorDailyNotify::class,
+        MonitorCheckCertificateCommand::class,
+        MonitorCheckCheckCommand::class,
+        MonitorCheckUptimeCommand::class,
         MonitorImport::class,
     ];
 
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(CheckUptime::class)->everyMinute();
-        $schedule->command(CheckCertificates::class)->daily();
-        $schedule->command(MonitorDailyNotify::class)->dailyAt('9:00');
+        $schedule->command(MonitorCheckCertificateCommand::class)->daily();
+        $schedule->command(MonitorCheckUptimeCommand::class)->everyMinute();
+        $schedule->command(MonitorCheckCheckCommand::class)->everyOddHour();
     }
 
     protected function bootstrappers(): array
