@@ -9,11 +9,21 @@ use App\Events\CertificateStatusSucceeded;
 use App\Models\Enums\CertificateStatus;
 use App\Models\MonitorCertificateStatus;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\SslCertificate\SslCertificate;
 
 trait SupportsCertificateCheck
 {
+    public function scopeFailedCertificateCheck(Builder $query): void
+    {
+        $query
+            ->whereDoesntHave('certificate')
+            ->orWhereHas('certificate', function(Builder $query) {
+                $query->whereNot('certificate_status', CertificateStatus::VALID);
+            });
+    }
+
     public function checkCertificate(): void
     {
         try {

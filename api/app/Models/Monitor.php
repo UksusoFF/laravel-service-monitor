@@ -25,6 +25,8 @@ use Orchid\Screen\AsSource;
  * @property-write mixed $uptime_check_failure_reason
  * @property-read \App\Models\MonitorUptimeStatus|null $uptime
  * @property-read \App\Models\MonitorUptimeStatus|null $uptimePrevious
+ * @method static \Illuminate\Database\Eloquent\Builder|Monitor failedCertificateCheck()
+ * @method static \Illuminate\Database\Eloquent\Builder|Monitor failedUptimeCheck()
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor query()

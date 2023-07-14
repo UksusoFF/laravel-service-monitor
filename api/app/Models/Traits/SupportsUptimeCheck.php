@@ -9,11 +9,21 @@ use App\Events\UptimeStatusSucceeded;
 use App\Models\Enums\UptimeStatus;
 use App\Models\MonitorUptimeStatus;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Http;
 
 trait SupportsUptimeCheck
 {
+    public function scopeFailedUptimeCheck(Builder $query): void
+    {
+        $query
+            ->whereDoesntHave('uptime')
+            ->orWhereHas('uptime', function(Builder $query) {
+                $query->whereNot('uptime_status', UptimeStatus::UP);
+            });
+    }
+
     public function checkUptime(): void
     {
         try {

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Models\Enums\CertificateStatus;
 use App\Models\Monitor;
-use Illuminate\Database\Eloquent\Builder;
 
 class MonitorCheckCertificateCommand extends AbstractMonitorCommand
 {
@@ -25,11 +23,7 @@ class MonitorCheckCertificateCommand extends AbstractMonitorCommand
 
     protected function process(): void
     {
-        Monitor::query()
-            ->whereDoesntHave('certificate')
-            ->orWhereHas('certificate', function(Builder $query) {
-                $query->whereNot('certificate_status', CertificateStatus::VALID);
-            })
+        Monitor::failedCertificateCheck()
             ->get()
             ->each(function(Monitor $monitor) {
                 $this->errors[] = "{$monitor->url}: {$monitor->certificate_status}";
