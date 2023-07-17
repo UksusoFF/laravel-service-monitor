@@ -37,7 +37,7 @@ trait SupportsCertificateCheck
 
     public function certificate(): HasOne
     {
-        return $this->hasOne(MonitorCertificateStatus::class)->latest();
+        return $this->hasOne(MonitorCertificateStatus::class)->latestOfMany();
     }
 
     public function certificatePrevious(): HasOne

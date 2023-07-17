@@ -37,7 +37,7 @@ trait SupportsUptimeCheck
 
     public function uptime(): HasOne
     {
-        return $this->hasOne(MonitorUptimeStatus::class)->latest();
+        return $this->hasOne(MonitorUptimeStatus::class)->latestOfMany();
     }
 
     public function uptimePrevious(): HasOne
