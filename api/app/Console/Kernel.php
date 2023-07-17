@@ -7,7 +7,8 @@ namespace App\Console;
 use App\Console\Commands\MonitorCheckCertificateCommand;
 use App\Console\Commands\MonitorCheckCheckCommand;
 use App\Console\Commands\MonitorCheckUptimeCommand;
-use App\Console\Commands\MonitorDailyReportCommand;
+use App\Console\Commands\MonitorDailyFailedReportCommand;
+use App\Console\Commands\MonitorDailyStatusReportCommand;
 use App\Console\Commands\MonitorImport;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -18,7 +19,8 @@ class Kernel extends ConsoleKernel
         MonitorCheckCertificateCommand::class,
         MonitorCheckCheckCommand::class,
         MonitorCheckUptimeCommand::class,
-        MonitorDailyReportCommand::class,
+        MonitorDailyFailedReportCommand::class,
+        MonitorDailyStatusReportCommand::class,
         MonitorImport::class,
     ];
 
@@ -27,7 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->command(MonitorCheckCertificateCommand::class)->daily();
         $schedule->command(MonitorCheckUptimeCommand::class)->everyMinute();
         $schedule->command(MonitorCheckCheckCommand::class)->everyOddHour();
-        $schedule->command(MonitorDailyReportCommand::class)->dailyAt('9:00');
+        $schedule->command(MonitorDailyFailedReportCommand::class)->dailyAt('9:00');
+        $schedule->command(MonitorDailyStatusReportCommand::class)->dailyAt('9:00');
     }
 
     protected function bootstrappers(): array

@@ -7,11 +7,11 @@ namespace App\Console\Commands;
 use App\Checks\CheckRepository;
 use App\Models\Monitor;
 
-class MonitorDailyReportCommand extends AbstractMonitorCommand
+class MonitorDailyFailedReportCommand extends AbstractMonitorCommand
 {
-    protected $signature = 'monitor:daily-report';
+    protected $signature = 'monitor:daily-failed-report';
 
-    protected $description = 'Command send daily report';
+    protected $description = 'Command send daily failed report';
 
     public function __construct(
         protected CheckRepository $checks
