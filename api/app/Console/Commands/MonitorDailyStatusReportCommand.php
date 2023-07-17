@@ -9,9 +9,9 @@ use App\Models\Monitor;
 
 class MonitorDailyStatusReportCommand extends AbstractMonitorCommand
 {
-    protected $signature = 'monitor:daily-failed-report';
+    protected $signature = 'monitor:daily-status-report';
 
-    protected $description = 'Command send daily failed report';
+    protected $description = 'Command send daily status report';
 
     public function __construct(
         protected CheckRepository $checks
