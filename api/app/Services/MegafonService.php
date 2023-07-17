@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 class MegafonService
 {
-    private string $api = 'https://b2blk.megafon.ru/ws/v1.0';
+    private string $api = 'https://b2blk.megafon.ru';
 
     protected Client $client;
 
@@ -35,8 +35,10 @@ class MegafonService
         return (float)Arr::get($user, 'data.currentBalance');
     }
 
-    protected function checkError(array $array): void
+    protected function checkError(?array $array): void
     {
+        throw_if($array === null, Exception::class);
+
         $error = Arr::get($array, 'error');
 
         throw_if($error !== null, Exception::class, $error);
@@ -45,15 +47,20 @@ class MegafonService
     protected function login(): array
     {
         $data = cache()->remember('megafon.account', $this->ttl, function() {
-            return Http::acceptJson()
-                ->asForm()
+            Http::acceptJson()
+                ->asJson()
                 ->setClient($this->client)
-                ->post("{$this->api}/auth/process", [
+                ->post("{$this->api}/api/login", [
                     'username' => config('megafon.login'),
                     'password' => config('megafon.password'),
                     'captchaTime' => Carbon::now()->timestamp,
-                ])
-                ->json();
+                ]);
+
+            $request = Http::acceptJson()
+                ->setClient($this->client)
+                ->get("{$this->api}/ws/v1.0/user/auth");
+
+            return $request->json();
         });
 
         $this->checkError($data);
@@ -66,7 +73,7 @@ class MegafonService
         $data = cache()->remember("megafon.user.{$uid}", $this->ttl, function() use ($uid) {
             return Http::acceptJson()
                 ->setClient($this->client)
-                ->get("{$this->api}/widget/accounts/balance/{$uid}")
+                ->get("{$this->api}/ws/v1.0/widget/accounts/balance/{$uid}")
                 ->json();
         });
 
