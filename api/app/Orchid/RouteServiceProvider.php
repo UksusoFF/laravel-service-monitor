@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use App\Orchid\Models\DashboardScreen;
 use App\Orchid\Models\Monitor\MonitorEditScreen;
 use App\Orchid\Models\Monitor\MonitorListScreen;
-use App\Orchid\Models\PlatformScreen;
 use App\Orchid\Models\Role\RoleEditScreen;
 use App\Orchid\Models\Role\RoleListScreen;
 use App\Orchid\Models\User\UserEditScreen;
@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware(config('platform.middleware.private'))
             ->group(function() {
                 // Main
-                Route::screen('/main', PlatformScreen::class)
+                Route::screen('/main', DashboardScreen::class)
                     ->name('platform.main');
 
                 // Platform > Profile

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Checks\CheckStatus;
-use App\Checks\MegafonCheck;
+use App\Checks\CheckRepository;
 use App\Models\Monitor;
 
 class MonitorDailyReportCommand extends AbstractMonitorCommand
@@ -14,12 +13,20 @@ class MonitorDailyReportCommand extends AbstractMonitorCommand
 
     protected $description = 'Command send daily report';
 
+    public function __construct(
+        protected CheckRepository $checks
+    ) {
+        parent::__construct();
+    }
+
     protected function process(): void
     {
-        $check = app(MegafonCheck::class);
-        $check->check();
-        if ($check->status !== CheckStatus::SUCCESS) {
-            $this->errors[] = $check->getMessageText();
+        foreach ($this->checks->all() as $check) {
+            $check->check();
+
+            if ($check->shouldBeReported()) {
+                $this->errors[] = $check->getMessageText();
+            }
         }
 
         Monitor::failedUptimeCheck()
