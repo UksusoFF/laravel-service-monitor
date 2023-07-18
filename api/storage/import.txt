@@ -1,10 +1,10 @@
-https://tt.nk-soft.com|tt-prod
-https://widget-online-record.nk-soft.com/|tt-prod
-https://pay-doc-widget.nk-soft.com/|tt-prod
+https://tt.nk-soft.com|production
+https://widget-online-record.nk-soft.com/|production
+https://pay-doc-widget.nk-soft.com/|production
 
-https://tt-test.nk-soft.com|tt-test
-https://test-widget-online-record.nk-soft.com/|tt-test
-https://test-pay-doc-widget.nk-soft.com/|tt-test
+https://tt-test.nk-soft.com|testing
+https://test-widget-online-record.nk-soft.com/|testing
+https://test-pay-doc-widget.nk-soft.com/|testing
 
 https://rock63.ru|rock63
 https://wiki.rock63.ru|rock63
