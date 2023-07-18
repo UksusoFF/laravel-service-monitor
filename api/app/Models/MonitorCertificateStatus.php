@@ -49,6 +49,10 @@ class MonitorCertificateStatus extends Model
 
     public function isExpiring(): bool
     {
+        if ($this->certificate_expiration_date === null) {
+            return false;
+        }
+
         return $this->certificate_expiration_date->lessThan(Carbon::now()->addMonth());
     }
 
