@@ -7,7 +7,7 @@ namespace App\Orchid\Models\Monitor;
 use App\Models\Monitor;
 use Orchid\Screen\Screen;
 
-class MonitorListScreen extends Screen
+class MonitorServicesScreen extends Screen
 {
     public function query(): iterable
     {
@@ -25,6 +25,6 @@ class MonitorListScreen extends Screen
 
     public function name(): ?string
     {
-        return __('Servers');
+        return __('Services');
     }
 }

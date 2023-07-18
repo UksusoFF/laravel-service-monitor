@@ -59,7 +59,7 @@ class MonitorEditScreen extends Screen
 
         Toast::info(__('Model was saved'));
 
-        return redirect()->route('admin.monitors');
+        return redirect()->route('admin.services');
     }
 
     public function delete(Monitor $model): RedirectResponse
@@ -68,6 +68,6 @@ class MonitorEditScreen extends Screen
 
         Toast::info(__('Model was removed'));
 
-        return redirect()->route('admin.monitors');
+        return redirect()->route('admin.services');
     }
 }

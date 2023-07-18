@@ -30,7 +30,8 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            Menu::make(__('Servers'))->icon('server')->route('admin.monitors'),
+            Menu::make(__('Services'))->icon('rocket')->route('admin.services'),
+            Menu::make(__('Servers'))->icon('server')->route('admin.servers'),
         ];
     }
 

@@ -13,6 +13,7 @@ return new class() extends Migration {
 
             $table->string('url')->unique();
             $table->string('group')->nullable();
+            $table->string('ip')->nullable();
 
             $table->timestamps();
         });

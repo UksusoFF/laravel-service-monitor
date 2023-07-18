@@ -29,6 +29,8 @@ trait SupportsUptimeCheck
         try {
             Http::get($this->url);
 
+            $this->ip = gethostbyname(parse_url($this->url, PHP_URL_HOST));
+
             $this->setUptime();
         } catch (Exception $exception) {
             $this->setUptimeException($exception);
@@ -70,6 +72,8 @@ trait SupportsUptimeCheck
         $status->uptime_status = UptimeStatus::UP;
 
         $status->save();
+
+        $this->save();
 
         if ($isStatusChanged) {
             event(new UptimeStatusSucceeded($this, $status));

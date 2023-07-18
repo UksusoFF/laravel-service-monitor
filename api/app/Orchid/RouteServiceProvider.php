@@ -6,7 +6,8 @@ namespace App\Orchid;
 
 use App\Orchid\Models\DashboardScreen;
 use App\Orchid\Models\Monitor\MonitorEditScreen;
-use App\Orchid\Models\Monitor\MonitorListScreen;
+use App\Orchid\Models\Monitor\MonitorServersScreen;
+use App\Orchid\Models\Monitor\MonitorServicesScreen;
 use App\Orchid\Models\Role\RoleEditScreen;
 use App\Orchid\Models\Role\RoleListScreen;
 use App\Orchid\Models\User\UserEditScreen;
@@ -94,7 +95,9 @@ class RouteServiceProvider extends ServiceProvider
                         ->push(__('Roles'), route('platform.systems.roles')));
 
                 Route::screen('monitor/{monitor}', MonitorEditScreen::class)->name('admin.monitors.edit');
-                Route::screen('monitors', MonitorListScreen::class)->name('admin.monitors');
+
+                Route::screen('services', MonitorServicesScreen::class)->name('admin.services');
+                Route::screen('servers', MonitorServersScreen::class)->name('admin.servers');
             });
     }
 }
