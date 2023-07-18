@@ -12,9 +12,14 @@ use Orchid\Support\Facades\Layout;
 
 class MonitorServersScreen extends Screen
 {
+    private const DEFAULT_IP = 'Undefined';
+
     public function query(): iterable
     {
-        return Monitor::all()->groupBy('ip');
+        return Monitor::all()
+            ->groupBy((function(Monitor $monitor) {
+                return $monitor->ip ?? self::DEFAULT_IP;
+            }));
     }
 
     public function name(): ?string
@@ -25,11 +30,13 @@ class MonitorServersScreen extends Screen
     public function layout(): iterable
     {
         return Monitor::all()
-            ->groupBy('ip')
+            ->groupBy((function(Monitor $monitor) {
+                return $monitor->ip ?? self::DEFAULT_IP;
+            }))
             ->map(function(Collection $items, string $ip) {
                 return Layout::legend($ip, [
                     Sight::make('hostname')->render(function() use ($ip) {
-                        return gethostbyaddr($ip);
+                        return $ip !== self::DEFAULT_IP ? gethostbyaddr($ip) : '';
                     }),
                     Sight::make('services')->render(function(Collection $items) {
                         return nl2br(implode(PHP_EOL, $items->map(function(Monitor $monitor) {
