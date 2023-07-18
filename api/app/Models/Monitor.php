@@ -20,10 +20,6 @@ use Orchid\Screen\AsSource;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\MonitorCertificateStatus|null $certificate
  * @property-read \App\Models\MonitorCertificateStatus|null $certificatePrevious
- * @property-read string $certificate_status
- * @property-read string $uptime_status
- * @property-write mixed $certificate_check_failure_reason
- * @property-write mixed $uptime_check_failure_reason
  * @property-read \App\Models\MonitorUptimeStatus|null $uptime
  * @property-read \App\Models\MonitorUptimeStatus|null $uptimePrevious
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor failedCertificateCheck()

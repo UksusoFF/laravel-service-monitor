@@ -25,20 +25,20 @@ class MonitorDailyFailedReportCommand extends AbstractMonitorCommand
             $check->check();
 
             if ($check->shouldBeReported()) {
-                $this->errors[] = $check->getMessageText();
+                $this->messages[] = $check->getMessageText();
             }
         }
 
         Monitor::failedUptimeCheck()
             ->get()
             ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url}: {$monitor->uptime_status}";
+                $this->messages[] = "{$monitor->uptime->getMessageText()}";
             });
 
         Monitor::failedCertificateCheck()
             ->get()
             ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url}: {$monitor->certificate_status}";
+                $this->messages[] = "{$monitor->certificate->getMessageText()}";
             });
     }
 }

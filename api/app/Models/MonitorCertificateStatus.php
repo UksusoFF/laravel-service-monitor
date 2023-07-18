@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Enums\CertificateStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\MonitorCertificateStatus
  *
  * @property int $id
  * @property int $monitor_id
- * @property string $certificate_status
+ * @property CertificateStatus $certificate_status
  * @property \Illuminate\Support\Carbon|null $certificate_expiration_date
  * @property string|null $certificate_issuer
  * @property string $certificate_check_failure_reason
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Monitor $monitor
  * @method static \Illuminate\Database\Eloquent\Builder|MonitorCertificateStatus newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MonitorCertificateStatus newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MonitorCertificateStatus query()
@@ -34,5 +37,16 @@ class MonitorCertificateStatus extends Model
 {
     protected $casts = [
         'certificate_expiration_date' => 'datetime',
+        'certificate_status' => CertificateStatus::class,
     ];
+
+    public function monitor(): BelongsTo
+    {
+        return $this->belongsTo(Monitor::class);
+    }
+
+    public function getMessageText(): string
+    {
+        return "{$this->certificate_status->emoji()} {$this->monitor->url}: {$this->certificate_status->value}";
+    }
 }

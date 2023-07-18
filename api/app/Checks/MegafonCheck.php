@@ -51,7 +51,7 @@ class MegafonCheck implements CheckInterface
 
     public function getMessageText(): string
     {
-        return "{$this->status->emoji()} Статус проверки баланса МегаФон: {$this->getStatus()}";
+        return "{$this->status->emoji()} Баланс МегаФон: {$this->getStatus()}";
     }
 
     public function getValueText(): string

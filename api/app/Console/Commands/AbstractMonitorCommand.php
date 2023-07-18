@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Console\Commands\Traits\ErrorReportable;
+use App\Console\Commands\Traits\Reportable;
 use Illuminate\Console\Command;
 
 abstract class AbstractMonitorCommand extends Command
 {
-    use ErrorReportable;
+    use Reportable;
 
     public function handle(): int
     {

@@ -18,7 +18,7 @@ class MonitorCheckCheckCommand extends AbstractMonitorCommand
         $check = app(MegafonCheck::class);
         $check->check();
         if ($check->status !== CheckStatus::SUCCESS) {
-            $this->errors[] = $check->getMessageText();
+            $this->messages[] = $check->getMessageText();
         }
     }
 }

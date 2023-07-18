@@ -47,24 +47,9 @@ trait SupportsUptimeCheck
         return $this->uptime()->skip(1);
     }
 
-    public function getUptimeStatusAttribute(): string
-    {
-        return $this->uptime?->uptime_status ?? UptimeStatus::NOT_YET_CHECKED;
-    }
-
-    public function setUptimeCheckFailureReasonAttribute(string $reason): void
-    {
-        /** @var \App\Models\MonitorUptimeStatus $status */
-        $status = $this->uptime()->get();
-
-        $status->uptime_status = $reason;
-
-        $status->save();
-    }
-
     public function setUptime(): void
     {
-        $isStatusChanged = ($this->uptime?->uptime_status ?? null) !== UptimeStatus::UP;
+        $isStatusChanged = $this->uptime->uptime_status !== UptimeStatus::UP;
 
         $status = new MonitorUptimeStatus();
 
@@ -82,7 +67,7 @@ trait SupportsUptimeCheck
 
     public function setUptimeException(Exception $exception): void
     {
-        $isStatusChanged = ($this->uptime?->uptime_status ?? null) !== UptimeStatus::DOWN;
+        $isStatusChanged = $this->uptime->uptime_status !== UptimeStatus::DOWN;
 
         $status = new MonitorUptimeStatus();
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
-use App\Events\HasMessage;
+use App\Interfaces\HasMessage;
 use App\Services\TelegramService;
 
 class MessageListener

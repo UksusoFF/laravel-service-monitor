@@ -6,9 +6,9 @@ namespace App\Console\Commands\Traits;
 
 use App\Services\TelegramService;
 
-trait ErrorReportable
+trait Reportable
 {
-    protected array $errors = [];
+    protected array $messages = [];
 
     private function tg(): TelegramService
     {
@@ -17,14 +17,14 @@ trait ErrorReportable
 
     public function errorReport(): void
     {
-        if (empty($this->errors)) {
+        if (empty($this->messages)) {
             return;
         }
 
         $lines = array_merge([
             'Сервер: ' . config('app.url'),
             'Сообщения:',
-        ], $this->errors);
+        ], $this->messages);
 
         foreach ($lines as $line) {
             $this->warn($line);

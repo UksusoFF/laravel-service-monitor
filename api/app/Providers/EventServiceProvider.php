@@ -9,10 +9,18 @@ use App\Events\CertificateStatusSucceeded;
 use App\Events\UptimeStatusFailed;
 use App\Events\UptimeStatusSucceeded;
 use App\Listeners\MessageListener;
+use App\Models\Monitor;
+use App\Observers\MonitorObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
+    protected $observers = [
+        Monitor::class => [
+            MonitorObserver::class,
+        ],
+    ];
+
     protected $listen = [
         CertificateStatusFailed::class => [
             MessageListener::class,

@@ -21,23 +21,23 @@ class MonitorDailyStatusReportCommand extends AbstractMonitorCommand
 
     protected function process(): void
     {
-        $this->errors[] = 'Статус системы сегодня';
+        $this->messages[] = 'Статус системы сегодня';
 
         foreach ($this->checks->all() as $check) {
             $check->check();
-            $this->errors[] = $check->getMessageText();
+            $this->messages[] = $check->getMessageText();
         }
 
         Monitor::query()
             ->get()
             ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url}: {$monitor->uptime_status}";
+                $this->messages[] = "{$monitor->uptime->getMessageText()}";
             });
 
         Monitor::query()
             ->get()
             ->each(function(Monitor $monitor) {
-                $this->errors[] = "{$monitor->url}: {$monitor->certificate_status}";
+                $this->messages[] = "{$monitor->certificate->getMessageText()}";
             });
     }
 }

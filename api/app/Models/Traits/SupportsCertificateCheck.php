@@ -45,24 +45,9 @@ trait SupportsCertificateCheck
         return $this->certificate()->skip(1);
     }
 
-    public function getCertificateStatusAttribute(): string
-    {
-        return $this->certificate?->certificate_status ?? CertificateStatus::NOT_YET_CHECKED;
-    }
-
-    public function setCertificateCheckFailureReasonAttribute(string $reason): void
-    {
-        /** @var \App\Models\MonitorCertificateStatus $status */
-        $status = $this->certificate()->get();
-
-        $status->certificate_status = $reason;
-
-        $status->save();
-    }
-
     public function setCertificate(SslCertificate $certificate): void
     {
-        $isStatusChanged = ($this->certificate?->certificate_status ?? null) !== CertificateStatus::VALID;
+        $isStatusChanged = $this->certificate->certificate_status !== CertificateStatus::VALID;
 
         $newStatus = $certificate->isValid($this->url)
             ? CertificateStatus::VALID
@@ -84,7 +69,7 @@ trait SupportsCertificateCheck
 
     public function setCertificateException(Exception $exception): void
     {
-        $isStatusChanged = ($this->certificate?->certificate_status ?? null) !== CertificateStatus::INVALID;
+        $isStatusChanged = $this->certificate->certificate_status !== CertificateStatus::INVALID;
 
         $status = new MonitorCertificateStatus();
 
