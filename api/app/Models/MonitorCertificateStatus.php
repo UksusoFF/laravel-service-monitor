@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Enums\CertificateStatus;
+use App\Models\Enums\UptimeStatus;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -45,8 +47,19 @@ class MonitorCertificateStatus extends Model
         return $this->belongsTo(Monitor::class);
     }
 
+    public function isExpiring(): bool
+    {
+        return $this->certificate_expiration_date->lessThan(Carbon::now()->addMonth());
+    }
+
     public function getMessageText(): string
     {
+        if ($this->isExpiring()) {
+            $emoji = UptimeStatus::NOT_YET_CHECKED->emoji();
+
+            return "{$emoji} {$this->monitor->url}: expiring at {$this->certificate_expiration_date->diffForHumans()}";
+        }
+
         return "{$this->certificate_status->emoji()} {$this->monitor->url}: {$this->certificate_status->value}";
     }
 }
