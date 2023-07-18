@@ -94,7 +94,7 @@ class RouteServiceProvider extends ServiceProvider
                         ->parent('platform.index')
                         ->push(__('Roles'), route('platform.systems.roles')));
 
-                Route::screen('monitor/{monitor}', MonitorEditScreen::class)->name('admin.monitors.edit');
+                Route::screen('monitor/{monitor?}', MonitorEditScreen::class)->name('admin.monitors.edit');
 
                 Route::screen('services', MonitorServicesScreen::class)->name('admin.services');
                 Route::screen('servers', MonitorServersScreen::class)->name('admin.servers');
