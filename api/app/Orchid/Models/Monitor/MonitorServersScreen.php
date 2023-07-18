@@ -28,6 +28,9 @@ class MonitorServersScreen extends Screen
             ->groupBy('ip')
             ->map(function(Collection $items, string $ip) {
                 return Layout::legend($ip, [
+                    Sight::make('hostname')->render(function() use ($ip) {
+                        return gethostbyaddr($ip);
+                    }),
                     Sight::make('services')->render(function(Collection $items) {
                         return nl2br(implode(PHP_EOL, $items->map(function(Monitor $monitor) {
                             return $monitor->url;
