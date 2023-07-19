@@ -6,5 +6,6 @@ https://tt-test.nk-soft.com|testing
 https://test-widget-online-record.nk-soft.com/|testing
 https://test-pay-doc-widget.nk-soft.com/|testing
 
-https://rock63.ru|rock63
-https://wiki.rock63.ru|rock63
+https://git.nk-soft.com|internal
+https://ems.nk-soft.com|internal
+https://demo-ems.nk-soft.com|internal
