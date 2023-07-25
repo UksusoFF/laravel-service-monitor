@@ -1,4 +1,4 @@
-# 💔 Laravel Service Monitor
+# Laravel Service Monitor 💔
 
 Web service for check uptime status other services and their SSL certificates.
 
