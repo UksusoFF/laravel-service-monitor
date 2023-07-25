@@ -1,6 +1,6 @@
 # Laravel Service Monitor
 
-Web service for monitor other servers and their SSL certificates.
+Web service for monitor other services and their SSL certificates.
 
 Made with [Laravel](https://laravel.com) and [Orchid](https://orchid.software).
 
