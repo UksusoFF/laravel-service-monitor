@@ -1,4 +1,4 @@
-# Laravel Monitor
+# Laravel Service Monitor
 
 Web service for monitor other servers and their SSL certificates.
 
