@@ -6,4 +6,13 @@ Status changes can be sent to Telegram channel.
 
 Made with [Laravel](https://laravel.com) and [Orchid](https://orchid.software).
 
-Inspired by [spatie/laravel-uptime-monitor](https://github.com/spatie/laravel-uptime-monitor) and [PingPing](https://pingping.io).
+Inspired by [spatie/laravel-uptime-monitor](https://github.com/spatie/laravel-uptime-monitor).
+
+## Self-Hosted alternatives
+* [Uptime Kuma](https://github.com/louislam/uptime-kuma)
+
+## SaaS alternatives
+* [PingPing](https://pingping.io/)
+* [UptimeMate](https://www.uptimemate.com/)
+* [Oh Dear](https://ohdear.app/)
+* [Cronitor](https://cronitor.io/)
