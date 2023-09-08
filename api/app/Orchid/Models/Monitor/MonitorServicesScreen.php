@@ -13,7 +13,7 @@ class MonitorServicesScreen extends Screen
     public function query(): iterable
     {
         return [
-            'monitors' => Monitor::paginate(),
+            'monitors' => Monitor::filters()->defaultSort('id')->paginate(),
         ];
     }
 

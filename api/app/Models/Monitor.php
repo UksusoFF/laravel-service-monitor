@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Models\Traits\SupportsCertificateCheck;
 use App\Models\Traits\SupportsUptimeCheck;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 /**
@@ -22,8 +23,12 @@ use Orchid\Screen\AsSource;
  * @property-read \App\Models\MonitorCertificateStatus|null $certificatePrevious
  * @property-read \App\Models\MonitorUptimeStatus|null $uptime
  * @property-read \App\Models\MonitorUptimeStatus|null $uptimePrevious
+ * @method static \Illuminate\Database\Eloquent\Builder|Monitor defaultSort(string $column, string $direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor failedCertificateCheck()
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor failedUptimeCheck()
+ * @method static \Illuminate\Database\Eloquent\Builder|Monitor filters(?mixed $kit = null, ?\Orchid\Filters\HttpFilter $httpFilter = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Monitor filtersApply(iterable $filters = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Monitor filtersApplySelection($class)
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Monitor query()
@@ -38,10 +43,16 @@ use Orchid\Screen\AsSource;
 class Monitor extends Model
 {
     use AsSource;
+    use Filterable;
     use SupportsCertificateCheck;
     use SupportsUptimeCheck;
 
     protected $fillable = [
+        'url',
+        'group',
+    ];
+
+    protected array $allowedSorts = [
         'url',
         'group',
     ];
