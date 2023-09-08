@@ -26,9 +26,9 @@ class MonitorImport extends Command
 
             [$url, $group] = explode('|', $line);
 
-            $monitor = new Monitor();
-
-            $monitor->url = $url;
+            $monitor = Monitor::firstOrNew([
+                'url' => $url,
+            ]);
             $monitor->group = $group;
 
             $monitor->save();
