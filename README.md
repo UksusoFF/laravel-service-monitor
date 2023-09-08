@@ -18,4 +18,4 @@ Inspired by [spatie/laravel-uptime-monitor](https://github.com/spatie/laravel-up
 * [Cronitor](https://cronitor.io/)
 
 ## Screenshot
-![image](https://github.com/UksusoFF/laravel-service-monitor/assets/1931442/3d821e5e-ef9d-4d15-8a01-ba64c3166319)
+![Screenshot](/Screenshot.png?raw=true)
