@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Enums\CertificateStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -13,7 +14,7 @@ return new class() extends Migration {
 
             $table->foreignId('monitor_id')->nullable(false)->references('id')->on('monitors')->cascadeOnDelete();
 
-            $table->string('certificate_status')->nullable();
+            $table->string('certificate_status')->default(CertificateStatus::NOT_YET_CHECKED->value);
             $table->timestamp('certificate_expiration_date')->nullable();
             $table->string('certificate_issuer')->nullable();
             $table->string('certificate_check_failure_reason')->default('');
