@@ -8,6 +8,7 @@ use App\Events\CertificateStatusFailed;
 use App\Events\CertificateStatusSucceeded;
 use App\Models\Enums\CertificateStatus;
 use App\Models\MonitorCertificateStatus;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -49,9 +50,7 @@ trait SupportsCertificateCheck
     {
         $isStatusChanged = $this->certificate->certificate_status !== CertificateStatus::VALID;
 
-        $newStatus = $certificate->isValid($this->url)
-            ? CertificateStatus::VALID
-            : CertificateStatus::INVALID;
+        $newStatus = $this->getCertificateStatus($certificate);
 
         $status = new MonitorCertificateStatus();
 
@@ -84,5 +83,18 @@ trait SupportsCertificateCheck
         if ($isStatusChanged) {
             event(new CertificateStatusFailed($this, $status));
         }
+    }
+
+    protected function getCertificateStatus(SslCertificate $certificate): CertificateStatus
+    {
+        if (!$certificate->isValid()) {
+            return CertificateStatus::INVALID;
+        }
+
+        if ($certificate->expirationDate()->isBefore(Carbon::now()->addMonth())) {
+            return CertificateStatus::EXPIRING;
+        }
+
+        return CertificateStatus::VALID;
     }
 }

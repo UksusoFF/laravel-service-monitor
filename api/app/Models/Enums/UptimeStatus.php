@@ -18,4 +18,13 @@ enum UptimeStatus: string
             self::UP => '✅',
         };
     }
+
+    public function priority(): string
+    {
+        return match($this) {
+            self::DOWN => 'danger',
+            self::NOT_YET_CHECKED => 'warning',
+            self::UP => 'success',
+        };
+    }
 }
