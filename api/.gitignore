@@ -4,6 +4,7 @@
 /public/storage
 /config/version.php
 /storage/*.key
+/storage/import.txt
 /vendor
 .env
 .env.backup
