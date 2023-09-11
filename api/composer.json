@@ -1,7 +1,7 @@
 {
-    "name": "tt/tt-monitor",
+    "name": "tt/laravel-service-monitor",
     "type": "project",
-    "description": "tt-monitor",
+    "description": "laravel-service-monitor",
     "keywords": [],
     "license": "proprietary",
     "require": {
