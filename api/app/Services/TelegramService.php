@@ -30,6 +30,10 @@ class TelegramService
             return;
         }
 
+        if (empty(config('telegram.key')) || empty(config('telegram.name'))) {
+            return void;
+        }
+
         try {
             $this->createTelegram();
 
