@@ -26,6 +26,10 @@ class MegafonService
 
     public function balance(): float
     {
+        if (empty(config('megafon.login')) || empty(config('megafon.password'))) {
+            return 0;
+        }
+
         $account = $this->login();
 
         $uid = (string)Arr::get($account, 'data.user.accountId');
