@@ -31,7 +31,7 @@ class TelegramService
         }
 
         if (empty(config('telegram.key')) || empty(config('telegram.name'))) {
-            return void;
+            return;
         }
 
         try {
