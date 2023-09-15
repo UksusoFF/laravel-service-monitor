@@ -53,7 +53,7 @@ class MonitorCertificateStatus extends Model
             return false;
         }
 
-        return $this->certificate_expiration_date->lessThan(Carbon::now()->addMonth());
+        return $this->certificate_expiration_date->lessThan(Carbon::now()->addWeek());
     }
 
     public function getMessageText(): string
