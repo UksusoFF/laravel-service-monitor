@@ -21,13 +21,6 @@ until db_ready; do
 done
 >&2 echo "Database is available"
 
-# Временно данные обнуляются каждый раз, до тех пор пока нет стабильной версии
-#php artisan migrate:fresh --force
-#php artisan orchid:admin admin admin@admin.com password
-#php artisan erp:cache
-#php artisan import:prop-facilities
-#php artisan data:generate
-
 nohup php artisan schedule:work &>> /var/www/api/storage/logs/artisan.log &
 
 php-fpm
