@@ -7,4 +7,4 @@ cd "${SCRIPT_DIR}"
 
 source "${SCRIPT_DIR}/.env"
 
-docker compose --file docker-compose.dev.yml --project-name "${APP_NAME}" up -d
+docker compose --file docker-compose.yml --file docker-compose.dev.yml --project-name "${APP_NAME}" up -d
