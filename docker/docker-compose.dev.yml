@@ -1,15 +1,6 @@
 version: "3.7"
 
 services:
-    node:
-        container_name: ${APP_NAME}-node
-        build:
-            context: ..
-            dockerfile: docker/dev/node/Dockerfile
-        volumes:
-            - ./../ui:/var/www/ui
-        tty: true
-
     adminer:
         container_name: ${APP_NAME}-adminer
         image: adminer

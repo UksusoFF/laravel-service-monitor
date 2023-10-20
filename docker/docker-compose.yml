@@ -8,7 +8,6 @@ services:
             dockerfile: docker/dev/php/Dockerfile
         volumes:
             - ./../api:/var/www/api
-            - ./../ui:/var/www/ui
             - ./.env:/var/www/api/.env
             - ./dev/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         extra_hosts:
@@ -36,7 +35,6 @@ services:
             - php
         volumes:
             - ./../api:/var/www/api
-            - ./../ui:/var/www/ui
             - ./data/logs/nginx:/var/log/nginx
         ports:
             - ${APP_PORT}:80
