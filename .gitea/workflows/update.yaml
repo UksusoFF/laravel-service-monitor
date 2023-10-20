@@ -1,0 +1,36 @@
+name: Update Project
+run-name: ${{ gitea.actor }} is updating project 🚀
+on: [ push ]
+
+jobs:
+    update:
+        runs-on: [ self-hosted ]
+        steps:
+            - run: echo "🎉 The job was automatically triggered by a ${{ gitea.event_name }} event."
+            - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by Gitea!"
+            - name: Configure SSH
+              run: |
+                  mkdir -p ~/.ssh/
+                  echo "$SSH_KEY" | tr -d '\r' > ~/.ssh/staging.key
+                  chmod 600 ~/.ssh/staging.key
+                  cat >>~/.ssh/config <<END
+                  Host staging
+                    HostName $SSH_HOST
+                    User $SSH_USER
+                    IdentityFile ~/.ssh/staging.key
+                    StrictHostKeyChecking no
+                  END
+                  cat ~/.ssh/config
+              env:
+                  SSH_USER: ${{ secrets.PRIVATE_USER }}
+                  SSH_KEY: ${{ secrets.PRIVATE_KEY }}
+                  SSH_HOST: ${{ secrets.PRIVATE_VDS }}
+
+            - name: Update Project
+              run: ssh staging 'cd ${{ secrets.PROJECT_ROOT }} && git pull'
+
+            - name: Restart Container
+              run: |
+                  ssh staging '.${{ secrets.PROJECT_ROOT }}/docker/down.sh'
+                  ssh staging '.${{ secrets.PROJECT_ROOT }}/docker/build.sh'
+                  ssh staging '.${{ secrets.PROJECT_ROOT }}/docker/up.sh'
