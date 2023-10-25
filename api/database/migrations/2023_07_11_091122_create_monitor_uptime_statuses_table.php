@@ -15,7 +15,7 @@ return new class() extends Migration {
             $table->foreignId('monitor_id')->nullable(false)->references('id')->on('monitors')->cascadeOnDelete();
 
             $table->string('uptime_status')->default(UptimeStatus::NOT_YET_CHECKED->value);
-            $table->string('uptime_check_failure_reason')->default('');
+            $table->longText('uptime_check_failure_reason')->default('');
 
             $table->timestamps();
         });

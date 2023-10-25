@@ -17,7 +17,7 @@ return new class() extends Migration {
             $table->string('certificate_status')->default(CertificateStatus::NOT_YET_CHECKED->value);
             $table->timestamp('certificate_expiration_date')->nullable();
             $table->string('certificate_issuer')->nullable();
-            $table->string('certificate_check_failure_reason')->default('');
+            $table->longText('certificate_check_failure_reason')->default('');
 
             $table->timestamps();
         });
