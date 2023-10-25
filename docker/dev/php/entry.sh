@@ -3,8 +3,6 @@ set -e
 
 source "/var/www/api/.env"
 
-chown www:www -R "/var/www/api"
-
 cd "/var/www/api"
 
 if [ ! -f "/var/www/api/vendor/autoload.php" ]; then
