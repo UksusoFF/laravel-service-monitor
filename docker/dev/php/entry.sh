@@ -3,7 +3,7 @@ set -e
 
 source "/var/www/api/.env"
 
-#chown www:www -R "/var/www/api"
+chown www:www -R "/var/www/api"
 
 cd "/var/www/api"
 
