@@ -31,6 +31,4 @@ jobs:
 
             - name: Restart Container
               run: |
-                  ssh staging 'bash ${{ secrets.PROJECT_ROOT }}/docker/down.sh'
-                  ssh staging 'bash ${{ secrets.PROJECT_ROOT }}/docker/build.sh'
-                  ssh staging 'bash ${{ secrets.PROJECT_ROOT }}/docker/up.sh'
+                  ssh staging 'bash ${{ secrets.PROJECT_ROOT }}/docker/deploy.sh'
