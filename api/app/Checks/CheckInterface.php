@@ -8,6 +8,8 @@ interface CheckInterface
 {
     public function check(): void;
 
+    public function isEnabled(): bool;
+
     public function shouldBeReported(): bool;
 
     public function getMessageText(): string;

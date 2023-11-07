@@ -15,8 +15,10 @@ class CheckRepository
      */
     public function all(): array
     {
-        return array_map(function(string $class) {
-            return app($class);
-        }, $this->registered);
+        return array_filter(array_map(function(string $class) {
+            /** @var \App\Checks\CheckInterface $instance */
+            $instance = app($class);
+            return $instance->isEnabled() ? $instance : null;
+        }, $this->registered));
     }
 }

@@ -44,6 +44,15 @@ class MegafonCheck implements CheckInterface
         $this->status = CheckStatus::SUCCESS;
     }
 
+    public function isEnabled(): bool
+    {
+        if (empty(config('megafon.login')) || empty(config('megafon.password'))) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function shouldBeReported(): bool
     {
         return $this->status !== CheckStatus::SUCCESS;
