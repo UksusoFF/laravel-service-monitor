@@ -2,7 +2,7 @@ FROM php:8.1-fpm
 
 WORKDIR /var/www/api
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get clean && apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
     libzip-dev \
