@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Checks\CheckStatus;
-use App\Checks\MegafonCheck;
+use App\Checks\CheckRepository;
 
 class MonitorCheckCheckCommand extends AbstractMonitorCommand
 {
@@ -13,12 +12,20 @@ class MonitorCheckCheckCommand extends AbstractMonitorCommand
 
     protected $description = 'Command checks check';
 
+    public function __construct(
+        protected CheckRepository $checks
+    ) {
+        parent::__construct();
+    }
+
     protected function check(): void
     {
-        $check = app(MegafonCheck::class);
-        $check->check();
-        if ($check->status !== CheckStatus::SUCCESS) {
-            $this->messages[] = $check->getMessageText();
+        foreach ($this->checks->all() as $check) {
+            $check->check();
+
+            if ($check->shouldBeReported()) {
+                $this->messages[] = $check->getMessageText();
+            }
         }
     }
 }
