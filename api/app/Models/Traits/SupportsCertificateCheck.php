@@ -46,6 +46,26 @@ trait SupportsCertificateCheck
         return $this->certificate()->skip(1);
     }
 
+    public function setCertificateNotChecked(): void
+    {
+        $isStatusChanged = $this->certificate->certificate_status !== CertificateStatus::NOT_YET_CHECKED;
+
+        if (!$isStatusChanged) {
+            return;
+        }
+
+        $status = new MonitorCertificateStatus();
+
+        $status->monitor_id = $this->id;
+        $status->certificate_status = CertificateStatus::NOT_YET_CHECKED;
+        $status->certificate_expiration_date = null;
+        $status->certificate_issuer = null;
+
+        $status->save();
+
+        event(new CertificateStatusFailed($this, $status));
+    }
+
     public function setCertificate(SslCertificate $certificate): void
     {
         $isStatusChanged = $this->certificate->certificate_status !== CertificateStatus::VALID;

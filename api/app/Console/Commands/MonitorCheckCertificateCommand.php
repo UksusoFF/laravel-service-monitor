@@ -17,6 +17,12 @@ class MonitorCheckCertificateCommand extends AbstractMonitorCommand
         Monitor::query()
             ->get()
             ->each(function(Monitor $monitor) {
+                if (!$monitor->shouldCheckCertificate()) {
+                    $monitor->setCertificateNotChecked();
+
+                    return;
+                }
+
                 $monitor->checkCertificate();
             });
     }

@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Models\Traits\SupportsCertificateCheck;
 use App\Models\Traits\SupportsUptimeCheck;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -56,4 +57,9 @@ class Monitor extends Model
         'url',
         'group',
     ];
+
+    public function shouldCheckCertificate(): bool
+    {
+        return Str::startsWith($this->url, 'https://');
+    }
 }
