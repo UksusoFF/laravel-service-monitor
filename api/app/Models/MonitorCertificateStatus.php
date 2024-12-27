@@ -59,7 +59,7 @@ class MonitorCertificateStatus extends Model
     public function getMessageText(): string
     {
         if ($this->isExpiring()) {
-            $emoji = UptimeStatus::NOT_YET_CHECKED->emoji();
+            $emoji = CertificateStatus::EXPIRING->emoji();
 
             return "{$emoji} {$this->monitor->url}: expiring at {$this->certificate_expiration_date->diffForHumans()}";
         }

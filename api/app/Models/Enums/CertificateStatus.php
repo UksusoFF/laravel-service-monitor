@@ -16,7 +16,7 @@ enum CertificateStatus: string
         return match($this) {
             self::EXPIRING => '⚠️',
             self::INVALID => '🚨',
-            self::NOT_YET_CHECKED => '⚠️',
+            self::NOT_YET_CHECKED => '',
             self::VALID => '✅',
         };
     }
@@ -26,7 +26,7 @@ enum CertificateStatus: string
         return match($this) {
             self::EXPIRING => 'warning',
             self::INVALID => 'danger',
-            self::NOT_YET_CHECKED => 'warning',
+            self::NOT_YET_CHECKED => 'secondary',
             self::VALID => 'success',
         };
     }

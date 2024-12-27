@@ -21,7 +21,7 @@ trait SupportsCertificateCheck
         $query
             ->whereDoesntHave('certificate')
             ->orWhereHas('certificate', function(Builder $query) {
-                $query->whereNot('certificate_status', CertificateStatus::VALID);
+                $query->whereNotIn('certificate_status', [CertificateStatus::VALID, CertificateStatus::NOT_YET_CHECKED]);
             });
     }
 
