@@ -47,21 +47,10 @@ class MonitorCertificateStatus extends Model
         return $this->belongsTo(Monitor::class);
     }
 
-    public function isExpiring(): bool
-    {
-        if ($this->certificate_expiration_date === null) {
-            return false;
-        }
-
-        return $this->certificate_expiration_date->lessThan(Carbon::now()->addWeek());
-    }
-
     public function getMessageText(): string
     {
-        if ($this->isExpiring()) {
-            $emoji = CertificateStatus::EXPIRING->emoji();
-
-            return "{$emoji} {$this->monitor->url}: expiring at {$this->certificate_expiration_date->diffForHumans()}";
+        if ($this->certificate_status === CertificateStatus::EXPIRING) {
+            return "{$this->certificate_status->emoji()} {$this->monitor->url}: expiring at {$this->certificate_expiration_date->diffForHumans()}";
         }
 
         return "{$this->certificate_status->emoji()} {$this->monitor->url}: {$this->certificate_status->value}";
